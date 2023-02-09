@@ -1,27 +1,25 @@
-FROM python:3.9-alpine
+FROM ubuntu:22.10
 
-MAINTAINER wuuker <https://github.com/ukewea>
+LABEL maintainer="ukewea https://github.com/ukewea"
 
-# Install NumPy, TA-Lib
-RUN apk update && \
-  apk add musl-dev wget git build-base && \
-  pip install cython && \
-  \
+ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev"
+ENV APT_PKG="python3 python3-pip python3-scipy python3-numpy python3-pandas python-is-python3"
+ENV PYPI_PKG="TA-Lib numpy pandas"
+ENV DEBIAN_FRONTEND=noninteractive
+
+COPY ta-lib ./ta-lib
+
+RUN apt-get update && apt-get upgrade -y && \
+  apt-get install -y ${APT_PKG_TEMPORARY} ${APT_PKG} && \
   ln -s /usr/include/locale.h /usr/include/xlocale.h && \
-  pip install numpy && \
-  \
-  wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
-  tar -xvzf ta-lib-0.4.0-src.tar.gz && \
-  cd ta-lib/ && \
-  ARCH=`uname -m` && \
-  if [ "$ARCH" == "aarch64" ]; then \
-    ./configure --prefix=/usr --build=arm-linux; \
-  else \
-    ./configure --prefix=/usr; \
-  fi && \
+  # compile TA-Lib library
+  cd ta-lib && \
+  ./configure --prefix=/usr; \
   make && \
   make install && \
-  pip install TA-Lib && \
+  cd .. && \
+  rm -rf ta-lib && \
   \
-  apk del musl-dev wget git build-base
-
+  pip3 install --no-cache-dir $PYPI_PKG && \
+  apt-get autoremove -y ${APT_PKG_TEMPORARY} && \
+  rm -rf /var/lib/apt/lists/*
