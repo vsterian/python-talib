@@ -28,7 +28,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 	python3-setuptools \
 	pybind11-dev \
 	wget
-
+RUN python3 -m pip install wheel --no-deps h5py==2.10.0
 RUN python3 -m pip install gdown
 
 RUN gdown https://drive.google.com/uc?id=11mujzVaFqa7R1_lB7q0kVPW22Ol51MPg
