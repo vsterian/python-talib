@@ -9,7 +9,24 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install python3.7 -y && \
     apt-get install python3-pip -y
-
+    
+RUN apt-get update && apt-get -y install --no-install-recommends \
+	gcc \
+	g++ \
+	gfortran \
+	libopenblas-dev \
+	libblas-dev \
+	liblapack-dev \
+	libatlas-base-dev \
+	libhdf5-dev \
+	libhdf5-103 \
+	pkg-config \
+	python3 \
+	python3-dev \
+	python3-pip \
+	python3-setuptools \
+	pybind11-dev \
+	wget
 
 RUN python3 -m pip install gdown
 
