@@ -33,7 +33,24 @@ jobs:
                   username: ${{ secrets.REGISTRY_USERNAME }}  # stored in GitHub Secrets
                   password: ${{ secrets.REGISTRY_PASSWORD }}  # stored in GitHub Secrets
           
-              - run: |
-                    
-                    docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
-                    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+              
+              
+            armv7_job:
+                # The host should always be Linux
+                runs-on: ubuntu-22.04
+                name: Build on ubuntu-22.04 armv7
+                steps:
+                  - uses: actions/checkout@v4
+                  - uses: uraimo/run-on-arch-action@v2
+                    name: Run commands
+                    id: runcmd
+                    with:
+                      arch: armv7
+                      distro: ubuntu22.04
+            
+                      
+            
+                      # Set an output parameter `uname` for use in subsequent steps
+                      run: |
+                        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+                        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest

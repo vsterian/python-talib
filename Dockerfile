@@ -1,4 +1,4 @@
-FROM ubuntu:23.10
+FROM --platform=linux/arm/v7 ubuntu:23.10
 
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
