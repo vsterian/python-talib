@@ -5,8 +5,8 @@ ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenbl
 ENV APT_PKG="python3 python3-pip"
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get remove python3.11 -y && \
-    apt-get update && \
+
+RUN apt-get update && \
     apt-get install python3.7 -y && \
     apt-get install python3-pip -y
 
