@@ -1,5 +1,5 @@
-FROM --platform=linux/arm/v7 ubuntu:latest
-
+FROM --platform=linux/arm/v7 ubuntu:20.04
+#
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
 ENV APT_PKG="python3 python3-pip"
@@ -15,8 +15,8 @@ RUN python3 -m pip install gdown
 
 RUN gdown https://drive.google.com/uc?id=11mujzVaFqa7R1_lB7q0kVPW22Ol51MPg
 
-RUN python3 -m install Cython
-RUN python3 -m install --upgrade pip
+RUN python3 -m pip install Cython
+RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install tensorflow-2.2.0-cp37-cp37m-linux_armv7l.whl
 RUN rm *.whl
 
