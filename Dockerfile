@@ -1,6 +1,5 @@
 FROM ubuntu:23.10
 
-LABEL maintainer="ukewea https://github.com/ukewea"
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
 ENV APT_PKG="python3 python3-pip"
