@@ -1,4 +1,5 @@
-FROM --platform=linux/arm/v7 ubuntu:20.04
+# debian:buster-20201117
+FROM debian@sha256:0e9c1df5dec20d9459ba6c30354a28bc5b6926444074bcf05486e9df41da3b1a
 #
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
@@ -9,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install python3.7 -y && \
     apt-get install python3-pip -y
-    
+
 RUN apt-get update && apt-get -y install --no-install-recommends \
 	gcc \
 	g++ \
