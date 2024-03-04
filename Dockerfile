@@ -5,11 +5,15 @@ ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenbl
 ENV APT_PKG="python3 python3-pip"
 ENV DEBIAN_FRONTEND=noninteractive
 
+RUN apt-get update && \
+    apt-get install python3.7 -y && \
+    apt-get install python3-pip -y
+
 
 RUN python3 -m pip install gdown
 
 RUN gdown https://drive.google.com/uc?id=11mujzVaFqa7R1_lB7q0kVPW22Ol51MPg
-RUN apt-get install python3-pip -y
+
 RUN python3 -m install Cython
 RUN python3 -m install --upgrade pip
 RUN python3 -m pip install tensorflow-2.2.0-cp37-cp37m-linux_armv7l.whl
