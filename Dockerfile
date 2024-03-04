@@ -1,11 +1,12 @@
-FROM --platform=linux/arm/v7 ubuntu:19.04
+FROM --platform=linux/arm/v7 ubuntu:latest
 
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
 ENV APT_PKG="python3 python3-pip"
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
+RUN apt-get remove python3.11 -y && \
+    apt-get update && \
     apt-get install python3.7 -y && \
     apt-get install python3-pip -y
 
