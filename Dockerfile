@@ -23,9 +23,9 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 
 
 
-RUN wget https://github.com/bitsy-ai/tensorflow-arm-bin/releases/download/v2.4.0/tensorflow-2.4.0-cp37-none-linux_aarch64.whl
+#RUN wget https://github.com/bitsy-ai/tensorflow-arm-bin/releases/download/v2.4.0/tensorflow-2.4.0-cp37-none-linux_aarch64.whl
 RUN python3 -m pip install Cython
 RUN python3 -m pip install --upgrade pip
 #RUN python3 -m pip install tensorflow-addons==0.10.0
-RUN python3 -m pip install tensorflow-2.4.0-cp37-none-linux_aarch64.whl
-RUN rm *.whl
+RUN python3 -m pip install tensorflow-aarch64
+#RUN rm *.whl
