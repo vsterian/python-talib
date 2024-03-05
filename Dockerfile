@@ -1,15 +1,9 @@
-# debian:buster-20201117
-FROM armindocachada/tensorflow2-opencv4-raspberrypi4:2.3_4.5.0
-#
+FROM --platform=linux/arm64/v8 python:3.7.17-bullseye
+
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
 ENV APT_PKG="python3 python3-pip"
 ENV DEBIAN_FRONTEND=noninteractive
-
-
-
-
-RUN apt-get update && apt-get -y install --no-install-recommends 
 
 COPY ta-lib ./ta-lib
 
