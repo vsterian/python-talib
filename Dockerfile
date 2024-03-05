@@ -8,12 +8,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 
-RUN apt-get update && apt-get -y install --no-install-recommends 
+
 
 COPY ta-lib ./ta-lib
 
-RUN apt-get update && apt-get upgrade -y && \
-  apt-get install -y ${APT_PKG_TEMPORARY} ${APT_PKG} && \
+ 
+RUN apt-get install -y ${APT_PKG_TEMPORARY} ${APT_PKG} && \
   ln -s /usr/include/locale.h /usr/include/xlocale.h && \
   \
   # compile TA-Lib library
