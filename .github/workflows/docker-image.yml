@@ -6,7 +6,7 @@ on:
       - main
 env:
   #REGISTRY_NAME: <your-acr-registry>  # replace with your ACR name
-  IMAGE_NAME: python-talib  # replace with your Docker image name
+  IMAGE_NAME: python-talib-tensorflow  # replace with your Docker image name
 
 permissions:
   packages: write
