@@ -7,6 +7,8 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 	gfortran \
 	libopenblas-dev \
 	libblas-dev \
+    libc-dev \
+    cargo \
 	liblapack-dev \
 	libatlas-base-dev \
 	libhdf5-dev \
@@ -28,4 +30,7 @@ RUN python3 -m pip install Cython
 RUN python3 -m pip install --upgrade pip
 #RUN python3 -m pip install tensorflow-addons==0.10.0
 RUN python3 -m pip install tensorflow-aarch64
+
+COPY requirements.txt .
+RUN python3 -m pip install -r requirments.txt
 #RUN rm *.whl
