@@ -32,5 +32,5 @@ RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install tensorflow-aarch64
 
 COPY requirements.txt .
-RUN python3 -m pip install -r requirments.txt
+RUN python3 -m pip install -r requirements.txt
 #RUN rm *.whl
