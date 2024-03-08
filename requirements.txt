@@ -48,6 +48,6 @@ zope.interface==5.5.2
 
 opencensus-ext-azure==1.1.9
 
-
+ta-lib
 azure-data-tables
 azure-core
