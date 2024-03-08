@@ -1,25 +1,36 @@
-FROM --platform=linux/arm64 dtcooper/raspberrypi-os:python3.9-bullseye
+# debian:buster-20201117
+FROM deletesfservice.azurecr.io/python-talib-tensorflow-requirments:latest
+
+RUN apt-get update && apt-get -y install --no-install-recommends \
+	gcc \
+	g++ \
+	gfortran \
+	libopenblas-dev \
+	libblas-dev \
+    libc-dev \
+    cargo \
+	liblapack-dev \
+	libatlas-base-dev \
+	libhdf5-dev \
+	libhdf5-103 \
+	pkg-config \
+	python3 \
+	python3-dev \
+	python3-pip \
+	python3-setuptools \
+	pybind11-dev \
+	wget
 
 
-ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev libopenblas-dev python3-dev python3-venv"
-ENV APT_PKG="python3 python3-pip"
-ENV DEBIAN_FRONTEND=noninteractive
 
-COPY ta-lib ./ta-lib
 
-RUN apt-get update && apt-get upgrade -y && \
-  apt-get install -y ${APT_PKG_TEMPORARY} ${APT_PKG} && \
-  ln -s /usr/include/locale.h /usr/include/xlocale.h && \
-  \
-  # compile TA-Lib library
-  cd ta-lib && \
-  ./configure --prefix=/usr; \
-  make && \
-  make install && \
-  cd .. && \
-  rm -rf ta-lib && \
-  \
 
-  # Clean up
-  apt-get autoremove -y ${APT_PKG_TEMPORARY} && \
-  rm -rf /var/lib/apt/lists/*
+#RUN wget https://github.com/bitsy-ai/tensorflow-arm-bin/releases/download/v2.4.0/tensorflow-2.4.0-cp37-none-linux_aarch64.whl
+RUN python3 -m pip install Cython
+RUN python3 -m pip install --upgrade pip
+#RUN python3 -m pip install tensorflow-addons==0.10.0
+RUN python3 -m pip install tensorflow-aarch64
+
+COPY requirements.txt .
+RUN python3 -m pip install -r requirements.txt
+#RUN rm *.whl
